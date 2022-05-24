@@ -60,6 +60,26 @@ namespace ADODotNetDemo
             }
             #endregion
 
+
+            #region CALLING PARAMETERIZED STORED PROCEDURE
+            public void CallParaProcedure()
+            {
+                Employee Emp = new Employee()
+                {
+                    EmpName = "Abhishek Sharma",
+                    EmpLoc = "Delhi"
+                };
+                com = new SqlCommand();
+                com.CommandText = "SPAddEmployeeAutoID";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = con;
+                com.Parameters.Add("@EmpName", SqlDbType.VarChar).Value = Emp.EmpName;
+                com.Parameters.Add("@EmpLoc", SqlDbType.VarChar).Value = Emp.EmpLoc;
+                int i = com.ExecuteNonQuery();
+                Console.WriteLine("{0}. record inserted :", i);
+            }
+            #endregion
+          
         }
         static void Main(string[] args)
         {
