@@ -86,7 +86,43 @@ namespace ADODotNetDemo
 
         public void UpdateEmployee()
         {
-            throw new NotImplementedException();
+            Console.Write("Enter your Employee ID : ");
+            int EmpId = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Enter your choice 1: Update Name & 2: Update Department: ");
+            int ch = Convert.ToInt32(Console.ReadLine());
+            int i;
+            switch (ch)
+            {
+                case 1:
+                    Console.Write("Enter updated Name : ");
+                    string EmpName = Console.ReadLine();
+                    com = new SqlCommand();
+                    com.CommandText = "update tblEmployee set EmpName = @EmpName where EmpId = @EmpId";
+                    com.Connection = con;
+                    com.Parameters.Add("@EmpName", SqlDbType.VarChar).Value = EmpName;
+                    com.Parameters.Add("@EmpId", SqlDbType.Int).Value = EmpId;
+                    i = com.ExecuteNonQuery();
+                    Console.WriteLine($" {i} Record update successfully:");
+                    com.Dispose();
+                    break;
+                case 2:
+
+                    Console.Write("Enter your new Department ID : ");
+                    int DeptID = Convert.ToInt32(Console.ReadLine());
+                    com = new SqlCommand();
+                    com.CommandText = "update tblEmployee set DeptID = @DeptID where EmpId = @EmpId";
+                    com.Connection = con;
+                    com.Parameters.Add("@DeptID", SqlDbType.Int).Value = DeptID;
+                    com.Parameters.Add("@EmpId", SqlDbType.Int).Value = EmpId;
+                    i = com.ExecuteNonQuery();
+                    Console.WriteLine($" {i} Record update successfully:");
+                    com.Dispose();
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid Choice:");
+                    break;
+            }
         }
     }
     internal class ADODBMLDemo
