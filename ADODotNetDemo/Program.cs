@@ -44,6 +44,25 @@ namespace ADODotNetDemo
                 counter++;
             }
             dr.Close();
+
+            Console.WriteLine("While loop:");
+            dr = com.ExecuteReader();
+
+            counter = 1;
+            while (dr.Read())
+            {
+                Console.WriteLine();
+                Console.WriteLine("{0} Employee details :", counter);
+                Console.WriteLine("EmpID   : {0}", dr[0].ToString());
+                Console.WriteLine("Emp Name : {0}", dr["EmpName"].ToString());
+                Console.WriteLine("Dept ID : {0}", dr["DeptID"].ToString());
+                Console.WriteLine();
+                counter++;
+
+            }
+            dr.Close();
+
+
             Console.Read();
 
         }
