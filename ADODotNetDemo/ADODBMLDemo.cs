@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System.Data.SqlClient;  //API
+
 namespace ADODotNetDemo
 {
     interface IEmployeeDatabaseML
@@ -16,17 +17,17 @@ namespace ADODotNetDemo
     }
     class EmployeeDatabaseML : IEmployeeDatabaseML
     {
-
         SqlConnection con;
         SqlCommand com;
         SqlDataReader dr;
         public EmployeeDatabaseML()
         {
+
             con = new SqlConnection(@"Data Source=DESKTOP-FCE1AML;Initial Catalog=GN22ADMDNF001;Integrated Security = true");
 
             con.Open();
-        }
 
+        }
         public void AddEmployee(ClsEmployee Employee)
         {
             throw new NotImplementedException();
@@ -34,12 +35,11 @@ namespace ADODotNetDemo
 
         public void AllEmployeeDetails()
         {
+
             //com = new SqlCommand("select * from tblEmployee", con);
-            //Or
             com = new SqlCommand();
             com.CommandText = "select * from tblEmployee";
             com.Connection = con;
-
             dr = com.ExecuteReader();
             int counter = 1;
             Console.WriteLine("EMPLOYEE DETAILS ARE AS FOLLOWS:");
@@ -55,8 +55,7 @@ namespace ADODotNetDemo
 
             }
             dr.Close();
-            com.Dispose(); // it will close connection after closing application
-            // as we can close connection using con.close() but what if other function wants to use the connection
+            com.Dispose();
         }
 
         public void DeleteEmployee()
@@ -71,10 +70,55 @@ namespace ADODotNetDemo
     }
     internal class ADODBMLDemo
     {
-
+       
         static void Main(string[] args)
         {
+            EmployeeDatabaseML databaseML = new EmployeeDatabaseML();
+            int ch;
+            char yn;
 
+
+
+            do
+            {
+                Console.WriteLine("---WELCOME EMPLOYEE MANAGEMENT PORTAL :");
+                Console.WriteLine("1. DISPLAY ALL EMPLOYEE :");
+                Console.WriteLine("2. ADD NEW EMPLOYEE :");
+                Console.WriteLine("3. UPDATE EMPLOYEE :");
+                Console.WriteLine("4. DELETE EMPLOYEE :");
+                Console.WriteLine("5. EXIT PORTAL :");
+                Console.Write("Enter your choice : ");
+                ch = Convert.ToInt32(Console.ReadLine());
+                switch (ch)
+                {
+                    case 1:
+                        databaseML.AllEmployeeDetails();
+                        break;
+                    case 2:
+                        Console.WriteLine("ENTER NEW EMPLOYEE DETAILS :");
+                        ClsEmployee Employee = new ClsEmployee();
+                        Console.Write("Enter Employee Name :");
+                        Employee.EmpName = Console.ReadLine();
+                        Console.Write("Enter Employee Dept ID :");
+                        Employee.DeptID = Convert.ToInt32(Console.ReadLine());
+                        databaseML.AddEmployee(Employee);
+                        break;
+                    case 3:
+                        databaseML.UpdateEmployee();
+                        break;
+                    case 4:
+                        databaseML.DeleteEmployee();
+                        break;
+                    case 5:
+                        Environment.Exit(1);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Choice :");
+                        break;
+                }
+                Console.Write("Do you want to continue..[Y/N] : ");
+                yn = Convert.ToChar(Console.ReadLine().ToLower());
+            } while (yn == 'y');
 
         }
     }
