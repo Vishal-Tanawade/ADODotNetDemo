@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ADODotNetDemo.ADODBMLDemo</StartupObject>
+    <StartupObject>ADODotNetDemo.ExecuteScalerDemo</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="ADODBMLDemo.cs" />
     <Compile Include="ClsEmployee.cs" />
+    <Compile Include="ExecuteScalerDemo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
