@@ -23,7 +23,7 @@ namespace ADODotNetDemo
             SqlCommand com;
             public ClsProcedureCall()
             {
-                string mycon = ConfigurationManager.ConnectionStrings["myconstr"].ConnectionString;
+                string mycon = ConfigurationManager.ConnectionStrings["mycon1"].ConnectionString;
 
                 //con = new SqlConnection(@"Data Source=DESKTOP-BLC9DN3\MSSQLSERVER1;Initial Catalog=CTSDBADM21DF010;Integrated Security=true");
                 con = new SqlConnection();
@@ -79,10 +79,48 @@ namespace ADODotNetDemo
                 Console.WriteLine("{0}. record inserted :", i);
             }
             #endregion
-          
+
+            #region CALLING PARAMETERIZED STORED PROCEDURE WITH OUT TYPE PARAMETER
+            public void CallParaProcedureWithOutpara()
+            {
+                Employee Emp = new Employee()
+                {
+                    EmpID = 1011,
+                    EmpName = "Abhishek",
+                    EmpLoc = "Delhi"
+                };
+
+                com = new SqlCommand();
+                com.CommandText = "spouttypeselectEmployee";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = con;
+                com.Parameters.Add("@EmpID", SqlDbType.Int).Value = Emp.EmpID;  //@EmpID should be same as in table
+                com.Parameters.Add("@EmpName", SqlDbType.VarChar).Value = Emp.EmpName;
+                SqlParameter OutP =
+                    new SqlParameter("@CurrentDateTime", SqlDbType.DateTime);
+                OutP.Direction = ParameterDirection.Output;
+                com.Parameters.Add(OutP);
+                SqlDataReader dr = com.ExecuteReader();
+                if (dr.HasRows)
+                {
+                    dr.Read();
+                    Console.WriteLine($"EmpId:{dr[0].ToString()} EmpName :{dr[1].ToString()} DeptID :{dr[2].ToString()} ");
+                    dr.Close();
+                }
+
+                Console.WriteLine($"Transaction done successfully at {OutP.Value}");
+                com.Dispose();
+            }
+            #endregion
         }
         static void Main(string[] args)
         {
+            ClsProcedureCall clsProcedureCall = new ClsProcedureCall();
+            //clsProcedureCall.CallNonParaProcedure();
+            clsProcedureCall.CallParaProcedure();
+
+            //clsProcedureCall.CallParaProcedureWithOutpara();
+
 
         }
     }
