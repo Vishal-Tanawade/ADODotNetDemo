@@ -31,8 +31,37 @@ namespace ADODotNetDemo
                 con.Open();
             }
 
+            #region CALLING NON PARAMETERIZED STORED PROCEDURE
+            public void CallNonParaProcedure()
+            {
+
+
+                com = new SqlCommand();
+                com.CommandText = "spshowemployeedetails";
+                com.CommandType = CommandType.StoredProcedure;
+                com.Connection = con;
+                SqlDataReader dr = com.ExecuteReader();
+                int count = 1;
+
+
+                Console.WriteLine("Employees details are as follows :");
+                while (dr.Read())
+                {
+                    Console.WriteLine("{0}. Employee details :", count);
+                    Console.WriteLine("Employee ID        : {0}", dr["EmpID"].ToString());
+                    Console.WriteLine("Employee Name      : {0}", dr["EmpName"].ToString());
+                    Console.WriteLine("Employee DeptID    : {0}", dr["DeptID"].ToString());
+                    Console.WriteLine("Employee Dept Name : {0}", dr["DeptName"].ToString());
+                    Console.WriteLine("Employee Dept Loc  : {0}", dr["DeptLoc"].ToString());
+                    count++;
+                    Console.WriteLine();
+                }
+                dr.Close();
+            }
+            #endregion
+
         }
-            static void Main(string[] args)
+        static void Main(string[] args)
         {
 
         }
