@@ -32,13 +32,13 @@ namespace ADODotNetDemo
         public void AddEmployee(ClsEmployee Employee)
         {
             com = new SqlCommand();
-            com.CommandText = "insert into tblEmployee values (@EmpName,@DeptID)";
+            com.CommandText = "insert into tblEmployee values (@EmpName1,@DeptID1)"; 
             //com.CommandText = "insert into tblEmployee values ("+ Employee.EmpName+","+Employee.DeptID+")";
 
             com.Connection = con;
 
-            com.Parameters.Add("@EmpName", SqlDbType.VarChar).Value = Employee.EmpName;//"Abhishek's"
-            com.Parameters.Add("@DeptID", SqlDbType.Int).Value = Employee.DeptID;
+            com.Parameters.Add("@EmpName1", SqlDbType.VarChar).Value = Employee.EmpName;//"Abhishek's"
+            com.Parameters.Add("@DeptID1", SqlDbType.Int).Value = Employee.DeptID;
 
 
             int i = com.ExecuteNonQuery();
@@ -72,7 +72,16 @@ namespace ADODotNetDemo
 
         public void DeleteEmployee()
         {
-            throw new NotImplementedException();
+            Console.Write("Enter Employee ID , whom you want to delete : ");
+            int EmpId22 = Convert.ToInt32(Console.ReadLine());
+            //com = new SqlCommand();
+            //com.CommandText = "delete from tblEmployee where EmpId = @EmpId";
+            //com.Connection = con;
+
+            com = new SqlCommand("delete from tblEmployee where EmpId = @EmpId1", con);
+            com.Parameters.Add("@EmpId1", SqlDbType.Int).Value = EmpId22;
+            int i = com.ExecuteNonQuery();
+            Console.WriteLine($" {i} Record deleted successfully:");
         }
 
         public void UpdateEmployee()
