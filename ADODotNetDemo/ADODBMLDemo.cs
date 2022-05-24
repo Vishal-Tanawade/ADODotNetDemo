@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -30,10 +31,21 @@ namespace ADODotNetDemo
         }
         public void AddEmployee(ClsEmployee Employee)
         {
-            throw new NotImplementedException();
-        }
+            com = new SqlCommand();
+            com.CommandText = "insert into tblEmployee values (@EmpName,@DeptID)";
+            //com.CommandText = "insert into tblEmployee values ("+ Employee.EmpName+","+Employee.DeptID+")";
 
-        public void AllEmployeeDetails()
+            com.Connection = con;
+
+            com.Parameters.Add("@EmpName", SqlDbType.VarChar).Value = Employee.EmpName;//"Abhishek's"
+            com.Parameters.Add("@DeptID", SqlDbType.Int).Value = Employee.DeptID;
+
+
+            int i = com.ExecuteNonQuery();
+            Console.WriteLine($" {i} Record inserted successfully:");
+            com.Dispose();
+        }
+            public void AllEmployeeDetails()
         {
 
             //com = new SqlCommand("select * from tblEmployee", con);
