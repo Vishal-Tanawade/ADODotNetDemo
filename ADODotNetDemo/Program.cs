@@ -30,6 +30,7 @@ namespace ADODotNetDemo
                 Console.WriteLine("Emp Name : {0}", dr["EmpName"].ToString());
                 Console.WriteLine("Dept ID : {0}", dr["DeptID"].ToString());
 
+
                 Console.WriteLine();
                 counter++;
 
