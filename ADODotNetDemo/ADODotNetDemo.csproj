@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ADODotNetDemo.Program</StartupObject>
+    <StartupObject>ADODotNetDemo.ADODBMLDisconnectedDemo</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -51,6 +51,7 @@
     <Compile Include="CallStoredProcedureDemo.cs" />
     <Compile Include="ClsEmployee.cs" />
     <Compile Include="DirectTableDemo.cs" />
+    <Compile Include="ADODBMLDisconnectedDemo.cs" />
     <Compile Include="ExecuteScalerDemo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
