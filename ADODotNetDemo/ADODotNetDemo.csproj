@@ -53,6 +53,7 @@
     <Compile Include="DirectTableDemo.cs" />
     <Compile Include="ADODBMLDisconnectedDemo.cs" />
     <Compile Include="ExecuteScalerDemo.cs" />
+    <Compile Include="MoreConceptsOnDataTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlTransactionDemo.cs" />
