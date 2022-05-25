@@ -22,7 +22,7 @@ namespace ADODotNetDemo
             conn.Open();
             OleDbCommand cmd = new OleDbCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "tblEmployeeWithSalary";
+            cmd.CommandText = "tblEmployeeWithSalary"; //this is table , with the help of oledb in one go we directly access whole table without writing any query , just we required table name
             cmd.CommandType = CommandType.TableDirect;
 
             OleDbDataReader dr = cmd.ExecuteReader();

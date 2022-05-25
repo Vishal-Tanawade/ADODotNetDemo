@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ADODotNetDemo.DirectTableDemo</StartupObject>
+    <StartupObject>ADODotNetDemo.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -54,6 +54,7 @@
     <Compile Include="ExecuteScalerDemo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlTransactionDemo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
